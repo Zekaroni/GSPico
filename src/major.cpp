@@ -290,6 +290,11 @@ void powerOff()
     writeDACValue(0);
 };
 
+void greatFairysFountain()
+{
+    
+};
+
 int main() 
 {
     powerOn();
