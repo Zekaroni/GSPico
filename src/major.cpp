@@ -27,11 +27,11 @@ const double B  = 30.87;
 const double* notes[] = {&C, &CS, &D, &DS, &E, &F, &FS, &G, &GS, &A, &AS, &B};
 
 
-#define WN = 1.0000;
-#define HN = 0.5000;
-#define QN = 0.2500;
-#define EN = 0.1250;
-#define SN = 0.0625;
+#define _WN = 1.0000;
+#define _HN = 0.5000;
+#define _QN = 0.2500;
+#define _EN = 0.1250;
+#define _SN = 0.0625;
 
 #define rest(time_ms){sleep_ns(time_ms);};
 
@@ -292,23 +292,59 @@ void powerOff()
 
 void greatFairysFountain()
 {
+    void PartTwo()
+    {
+
+    };
+
+    void PartOne()
+    {
+
+    };
+
+};
+
+void longLongTime()
+{
+    const int BPM = 120;
+    const int TIME_SIGNATURE = 4; // 4 for 4/4, 3 for 3/4, etc
+    double WN_LENGTH_MS = (double)60000/(double)BPM * (double)TIME_SIGNATURE;
+
+    double WHOLE_NOTE     = WN_LENGTH_MS*_WN;
+    double HALF_NOTE      = WN_LENGTH_MS*_HN;
+    double QUARTER_NOTE   = WN_LENGTH_MS*_QN;
+    double EIGHT_NOTE     = WN_LENGTH_MS*_EN;
+    double SIXTEENTH_NOTE = WN_LENGTH_MS*_SN;
     
+    playPWM(B,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(AS,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(A,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(G,4,HALF_NOTE, PWM_PIN);
+    playPWM(B,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(D,5,HALF_NOTE, PWM_PIN);
+    playPWM(G,4,HALF_NOTE, PWM_PIN);
+    playPWM(FS,4,HALF_NOTE, PWM_PIN);
+    playPWM(B,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(D,5,HALF_NOTE, PWM_PIN);
+    playPWM(FS,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(E,4,HALF_NOTE, PWM_PIN);
+    playPWM(FS,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(E,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(FS,4,QUARTER_NOTE, PWM_PIN);
+    playPWM(E,4,WHOLE_NOTE, PWM_PIN);
 };
 
 int main() 
 {
     powerOn();
-    const int BPM = 120;
-    const int TIME_SIGNATURE = 4; // 4 for 4/4, 3 for 3/4, etc
-    double WN_LENGTH_MS = (double)60000/(double)BPM * (double)TIME_SIGNATURE;
 
-    for (int i = 0; i < 20; i++)
-    {
-        playPWM(C,4,WN_LENGTH_MS,PWM_PIN);
-        rest(WN_LENGTH_MS);
-        playPWM(G,4,WN_LENGTH_MS,PWM_PIN);
-        rest(WN_LENGTH_MS);
-    };
+    // for (int i = 0; i < 20; i++)
+    // {
+    //     playPWM(C,4,WN_LENGTH_MS,PWM_PIN);
+    //     rest(WN_LENGTH_MS);
+    //     playPWM(G,4,WN_LENGTH_MS,PWM_PIN);
+    //     rest(WN_LENGTH_MS);
+    // };
 
     // multicore_launch_core1(secondCoreStartup);
     // writeDACValue(0);
