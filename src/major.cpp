@@ -26,7 +26,14 @@ const double B  = 30.87;
 
 const double* notes[] = {&C, &CS, &D, &DS, &E, &F, &FS, &G, &GS, &A, &AS, &B};
 
-#define rest(time_ms){sleep_ms(time_ms);};
+
+#define WN = 1.0000;
+#define HN = 0.5000;
+#define QN = 0.2500;
+#define EN = 0.1250;
+#define SN = 0.0625;
+
+#define rest(time_ms){sleep_ns(time_ms);};
 
 const int NULL_PIN = -1;
 const uint8_t DAC_BIT_DEPTH = 5;
@@ -45,7 +52,8 @@ const uint8_t* DAC_PINS[] = {&DAC_PIN_0,&DAC_PIN_1,&DAC_PIN_2,&DAC_PIN_3,&DAC_PI
 const double pi = 3.14159;
 
 void sleep_ns(long duration)
-{ // Will be in muliples of 8ns
+{ // Will be in muliples of 8ns??
+    // NOTE: This does not scale to clock of the CPU
     duration *= 1000; // convert ms to ns
     // TODO: Figure out this magic number
     int cycles = duration/39.8;
@@ -97,9 +105,9 @@ void playFrequency(double frequency, long duration, int pin)
     for (int i = 0; i < iterations; i++)
     {
         gpio_put(pin, GPIO_ON);
-        sleep_us(half_period_us);
+        sleep_ns(half_period_us);
         gpio_put(pin, GPIO_OFF);
-        sleep_us(half_period_us);
+        sleep_ns(half_period_us);
     };
 };
 
@@ -116,9 +124,9 @@ void playPWM(double note, int octave, long duration, int pin)
     for (int i = 0; i < iterations; i++)
     {
         gpio_put(pin, GPIO_ON);
-        sleep_us(half_period_us);
+        sleep_ns(half_period_us);
         gpio_put(pin, GPIO_OFF);
-        sleep_us(half_period_us);
+        sleep_ns(half_period_us);
     };
 };
 
@@ -285,11 +293,20 @@ void powerOff()
 int main() 
 {
     powerOn();
+    const int BPM = 120;
+    const int TIME_SIGNATURE = 4; // 4 for 4/4, 3 for 3/4, etc
+    double WN_LENGTH_MS = (double)60000/(double)BPM * (double)TIME_SIGNATURE;
+
+    for (int i = 0; i < 20; i++)
+    {
+        playPWM(C,4,WN_LENGTH_MS,PWM_PIN);
+        rest(WN_LENGTH_MS);
+        playPWM(G,4,WN_LENGTH_MS,PWM_PIN);
+        rest(WN_LENGTH_MS);
+    };
+
     // multicore_launch_core1(secondCoreStartup);
     // writeDACValue(0);
-    // playTriangle(E,5,1000,NULL_PIN);
-    // playTriangle(C,4,1000,NULL_PIN);
-    // playPWM(C,4,1000,PWM_PIN);
 
     powerOff();
     return 0;
