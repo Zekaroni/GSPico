@@ -2,4 +2,5 @@
 bin
 build
 sdk
+audio
 doc/PicoSDK.pdf
