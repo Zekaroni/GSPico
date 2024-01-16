@@ -60,6 +60,7 @@ namespace Music {
     const double _QN = 0.2500;
     const double _EN = 0.1250;
     const double _SN = 0.0625;
+    const double _TN = 0.0313;
 
 
     void powerOnSound(int pin, void (&func)(double, int, long, int));
@@ -77,21 +78,6 @@ namespace Music {
 namespace Utility
 {
     bool powerUpSound = true;
-
-    void sleep_ns(long duration)
-    { 
-        /* 
-        Will be in muliples of 8ns??
-        NOTE: This does not scale to clock of the CPU
-        */
-        duration *= 1000; // convert ms to ns
-        // TODO: Figure out this magic number
-        int cycles = duration/39.8;
-        for (int i = 0; i < cycles; i++)
-        {
-            __asm volatile ("nop\n");
-        };
-    };
 
     void powerOn()
     {
@@ -114,11 +100,25 @@ namespace Utility
         gpio_put(LED_PIN, GPIO_OFF);
         DAC::writeDACValue(0);
     };
+
+    void pushData()
+    {
+        multicore_fifo_push_blocking(1);
+    };
+
+    void waitForData()
+    {
+        int n__ = multicore_fifo_pop_blocking();
+    };
 };
 
 namespace Music
 {
-    #define rest(time_ms){Utility::sleep_ns(time_ms);};
+    void rest(double time_ms)
+    {
+        // TODO: Make this more accurate and allow for nano-seconds
+        sleep_ms(time_ms);
+    };
 
     double calculateNoteFrequency(double baseFrequency, int octaveShift)
     {
@@ -142,17 +142,17 @@ namespace Music
         for (int i = 0; i < iterations; i++)
         {
             gpio_put(pin, GPIO_ON);
-            Utility::sleep_ns(half_period_us);
+            sleep_us(half_period_us);
             gpio_put(pin, GPIO_OFF);
-            Utility::sleep_ns(half_period_us);
+            sleep_us(half_period_us);
         };
     };
 
     void playPWM(double note, int octave, long duration, int pin)
     {
         double frequency = calculateNoteFrequency(note, octave);
-        int period_us = static_cast<int>(1e6 / frequency);
-        int half_period_us = period_us / 2;
+        double period_us = (double)1e6 / frequency;
+        int half_period_us = period_us / (double)2;
 
         duration*=1000;
 
@@ -161,9 +161,9 @@ namespace Music
         for (int i = 0; i < iterations; i++)
         {
             gpio_put(pin, GPIO_ON);
-            Utility::sleep_ns(half_period_us);
+            sleep_us(half_period_us);
             gpio_put(pin, GPIO_OFF);
-            Utility::sleep_ns(half_period_us);
+            sleep_us(half_period_us);
         };
     };
 
@@ -174,19 +174,19 @@ namespace Music
         //  - Offset by 90 degrees
         double frequency = calculateNoteFrequency(note,octave);
         int steps = std::pow(2, DAC::DAC_BIT_DEPTH)*2-2;
-        double delay = (((double)1 /  frequency) * (1/(double)steps) * 1000000);
-        int itterations = (duration * 1000)/(delay)/steps;
+        double delay = (((double)1 /  frequency) * ((double)1/(double)steps) * (double)1000000);
+        int itterations = (duration * 1000)/delay/steps;
         for (int i = 0; i < itterations; i++)
         {
             for (int down_value = DAC::DAC_MAX_VALUE; down_value > 0; down_value--)
             {
                 DAC::writeDACValue(down_value);
-                Utility::sleep_ns(delay);
+                sleep_us(delay);
             };
             for (int up_value = 0; up_value < DAC::DAC_MAX_VALUE; up_value++)
             {
                 DAC::writeDACValue(up_value);
-                Utility::sleep_ns(delay);
+                sleep_us(delay);
             };
         };
     };
@@ -202,12 +202,12 @@ namespace Music
             for (int down_value = DAC::DAC_MAX_VALUE; down_value > 0; down_value--)
             {
                 DAC::writeDACValue(down_value);
-                Utility::sleep_ns(delay);
+                sleep_us(delay);
             };
             for (int up_value = 0; up_value < DAC::DAC_MAX_VALUE; up_value++)
             {
                 DAC::writeDACValue(up_value);
-                Utility::sleep_ns(delay);
+                sleep_us(delay);
             };
         };
     };
