@@ -11,7 +11,7 @@ namespace Tetris
     double QUARTER_NOTE   = WN_LENGTH_MS*Music::_QN;
     double EIGHTH_NOTE     = WN_LENGTH_MS*Music::_EN;
     double SIXTEENTH_NOTE = WN_LENGTH_MS*Music::_SN;
-    double THIRTYSECOND_NOTE = WN_LENGTH_MS*Music::_SN;
+    double THIRTYSECOND_NOTE = WN_LENGTH_MS*Music::_TN;
 
     auto EE = []()
     {
