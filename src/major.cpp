@@ -141,10 +141,14 @@ void tetris()
 
             // Bar 5
             Utility::waitForData();
-            Music::playTriangle(Music::D,3,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
-            Music::playTriangle(Music::D,2,Tetris::QUARTER_NOTE,DAC::NULL_PIN);
-            Music::playTriangle(Music::D,2,Tetris::QUARTER_NOTE,DAC::NULL_PIN);
-            Music::playTriangle(Music::D,2,Tetris::SIXTEENTH_NOTE,DAC::NULL_PIN);
+            Music::playTriangle(Music::D,3,Tetris::EIGHTH_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
+            Music::playTriangle(Music::D,2,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
+            Music::playTriangle(Music::D,2,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
+            Music::playTriangle(Music::D,2,Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
             Music::playTriangle(Music::D,2,Tetris::SIXTEENTH_NOTE,DAC::NULL_PIN);
             Music::playTriangle(Music::A,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
             Music::playTriangle(Music::F,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
@@ -152,10 +156,12 @@ void tetris()
             // Bar 6
             Utility::waitForData();
             Music::playTriangle(Music::C,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
-            Music::playTriangle(Music::C,3,Tetris::QUARTER_NOTE,DAC::NULL_PIN);
+            Music::playTriangle(Music::C,3,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
             Music::playTriangle(Music::C,3,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
             Music::playTriangle(Music::C,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
-            Music::playTriangle(Music::G,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
+            Music::playTriangle(Music::G,2,Tetris::EIGHTH_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
             Music::playTriangle(Music::G,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
             Music::playTriangle(Music::A,2,Tetris::EIGHTH_NOTE,DAC::NULL_PIN);
 
@@ -166,8 +172,10 @@ void tetris()
 
             // Bar 8
             Utility::waitForData();
-            Music::playTriangle(Music::A,2,Tetris::QUARTER_NOTE,DAC::NULL_PIN);
-            Music::playTriangle(Music::A,2,Tetris::QUARTER_NOTE,DAC::NULL_PIN);
+            Music::playTriangle(Music::A,2,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
+            Music::playTriangle(Music::A,2,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,DAC::NULL_PIN);
+            Music::rest(Tetris::THIRTYSECOND_NOTE);
             Music::playTriangle(Music::A,2,Tetris::HALF_NOTE,DAC::NULL_PIN);
         };
     };
