@@ -33,12 +33,6 @@ namespace Tetris
 
 void tetris()
 {
-    // TODO: Fix issue with slowly getting out of sync
-    //  - multi fifo push, etc
-    //  - each bar or 2 bars multi fifo sync
-    //
-    //  - figure out a way to add a small delay so same notes back to back are more defined
-
     auto verseOne = []()
     {
         
@@ -53,7 +47,8 @@ void tetris()
         
         // Bar 2
         Utility::pushData();
-        Music::playPWM(Music::A,4,Tetris::QUARTER_NOTE,PWM_PIN);
+        Music::playPWM(Music::A,4,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,PWM_PIN);
+        Music::rest(Tetris::THIRTYSECOND_NOTE);
         Music::playPWM(Music::A,4,Tetris::EIGHTH_NOTE,PWM_PIN);
         Music::playPWM(Music::C,5,Tetris::EIGHTH_NOTE,PWM_PIN);
         Music::playPWM(Music::E,5,Tetris::QUARTER_NOTE,PWM_PIN);
@@ -62,7 +57,8 @@ void tetris()
 
         // Bar 3
         Utility::pushData();
-        Music::playPWM(Music::B,4,Tetris::QUARTER_NOTE,PWM_PIN);
+        Music::playPWM(Music::B,4,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,PWM_PIN);
+        Music::rest(Tetris::THIRTYSECOND_NOTE);
         Music::playPWM(Music::B,4,Tetris::EIGHTH_NOTE,PWM_PIN);
         Music::playPWM(Music::C,5,Tetris::EIGHTH_NOTE,PWM_PIN);
         Music::playPWM(Music::D,5,Tetris::QUARTER_NOTE,PWM_PIN);
@@ -71,7 +67,8 @@ void tetris()
         // Bar 4
         Utility::pushData();
         Music::playPWM(Music::C,5,Tetris::QUARTER_NOTE,PWM_PIN);
-        Music::playPWM(Music::A,4,Tetris::QUARTER_NOTE,PWM_PIN);
+        Music::playPWM(Music::A,4,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,PWM_PIN);
+        Music::rest(Tetris::THIRTYSECOND_NOTE);
         Music::playPWM(Music::A,4,Tetris::HALF_NOTE,PWM_PIN);
 
         // Bar 5
@@ -93,7 +90,8 @@ void tetris()
 
         // Bar 7
         Utility::pushData();
-        Music::playPWM(Music::B,4,Tetris::QUARTER_NOTE,PWM_PIN);
+        Music::playPWM(Music::B,4,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,PWM_PIN);
+        Music::rest(Tetris::THIRTYSECOND_NOTE);
         Music::playPWM(Music::B,4,Tetris::EIGHTH_NOTE,PWM_PIN);
         Music::playPWM(Music::C,5,Tetris::EIGHTH_NOTE,PWM_PIN);
         Music::playPWM(Music::D,5,Tetris::QUARTER_NOTE,PWM_PIN);
@@ -102,7 +100,8 @@ void tetris()
         // Bar 8
         Utility::pushData();
         Music::playPWM(Music::C,5,Tetris::QUARTER_NOTE,PWM_PIN);
-        Music::playPWM(Music::A,4,Tetris::QUARTER_NOTE,PWM_PIN);
+        Music::playPWM(Music::A,4,Tetris::QUARTER_NOTE-Tetris::THIRTYSECOND_NOTE,PWM_PIN);
+        Music::rest(Tetris::THIRTYSECOND_NOTE);
         Music::playPWM(Music::A,4,Tetris::HALF_NOTE,PWM_PIN);
     };
 
