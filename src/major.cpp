@@ -33,7 +33,7 @@ namespace Tetris
 
 void tetris()
 {
-    auto verseOne = []()
+    auto PWM_CHANNEL = []()
     {
         
         // Bar 1
@@ -183,7 +183,7 @@ void tetris()
     multicore_launch_core1(bass);
     while (1)
     {
-        verseOne();
+        PWM_CHANNEL();
     };
 };
 
