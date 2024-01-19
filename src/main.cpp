@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../include/soundDriver.h"
 
 namespace Tetris
@@ -183,11 +184,13 @@ void tetris()
     while (1)
     {
         PWM_CHANNEL();
+        printf("Re-looping");
     };
 };
 
 int main() 
 {
+    stdio_init_all();
     Utility::powerUpSound = false;
     Utility::powerOn();
     tetris();
