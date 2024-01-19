@@ -226,9 +226,13 @@ void tetris()
             Utility::waitForData();
             Tetris::AA();
             Tetris::AA();
+            Tetris::AA();
+            Tetris::AA();
 
             // Bar 10
             Utility::waitForData();
+            Tetris::GSGS();
+            Tetris::GSGS();
             Tetris::GSGS();
             Tetris::GSGS();
 
@@ -236,9 +240,13 @@ void tetris()
             Utility::waitForData();
             Tetris::AA();
             Tetris::AA();
+            Tetris::AA();
+            Tetris::AA();
 
             // Bar 12
             Utility::waitForData();
+            Tetris::GSGS();
+            Tetris::GSGS();
             Tetris::GSGS();
             Tetris::GSGS();
 
@@ -246,14 +254,20 @@ void tetris()
             Utility::waitForData();
             Tetris::AA();
             Tetris::AA();
+            Tetris::AA();
+            Tetris::AA();
             
             // Bar 14
             Utility::waitForData();
             Tetris::GSGS();
             Tetris::GSGS();
+            Tetris::GSGS();
+            Tetris::GSGS();
 
             // Bar 15
             Utility::waitForData();
+            Tetris::AA();
+            Tetris::AA();
             Tetris::AA();
             Tetris::AA();
 
