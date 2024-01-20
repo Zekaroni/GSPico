@@ -1,0 +1,8 @@
+https://www.etechnophiles.com/raspberry-pi-pico-pinout-specifications-datasheet-in-detail/#how-many-analog-pins-are-in-pi-pico
+https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf
+https://pinoutguide.com/Video/VGAVesaDdc_pinout.shtml
+https://eater.net/vga
+https://youtu.be/uqY3FMuMuRo?t=182
+https://www.youtube.com/watch?v=BAoTBg8MJJ4
+https://www.youtube.com/watch?v=JhajoAyP8e4
+https://www.youtube.com/watch?v=yYnQYF_Xa8g
